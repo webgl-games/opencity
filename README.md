@@ -5,7 +5,7 @@ nothing depending on another game's assets. Walk, drive cars and a truck, fly a
 helicopter and hit stunt ramps in a procedurally built city with ambient
 traffic and pedestrians.
 
-Open source (MIT), part of [github.com/splatverse](https://github.com/splatverse).
+Open source (MIT), part of [github.com/webgl-games](https://github.com/webgl-games).
 
 | On foot | Driving | Flying |
 |---|---|---|
