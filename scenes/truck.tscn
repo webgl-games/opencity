@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/car.gd" id="1_car"]
+
+[sub_resource type="BoxMesh" id="Mesh_chassis"]
+size = Vector3(2.4, 0.5, 6.6)
+
+[sub_resource type="BoxMesh" id="Mesh_cab"]
+size = Vector3(2.3, 1.3, 1.7)
+
+[sub_resource type="BoxMesh" id="Mesh_cargo"]
+size = Vector3(2.35, 2.0, 4.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cab"]
+albedo_color = Color(0.75, 0.3, 0.1, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_chassis"]
+albedo_color = Color(0.12, 0.12, 0.13, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_cargo"]
+albedo_color = Color(0.78, 0.78, 0.8, 1)
+roughness = 0.65
+
+[sub_resource type="CylinderMesh" id="Mesh_wheel"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 0.35
+radial_segments = 20
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_tire"]
+albedo_color = Color(0.06, 0.06, 0.07, 1)
+roughness = 0.95
+
+[sub_resource type="BoxShape3D" id="Shape_body"]
+size = Vector3(2.4, 2.4, 6.6)
+
+[node name="Truck" type="VehicleBody3D"]
+mass = 3800.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.7, 0)
+script = ExtResource("1_car")
+max_engine_force = 9000.0
+top_speed_kmh = 115.0
+boost_force_multiplier = 1.5
+boost_top_speed_kmh = 150.0
+reverse_force_factor = 0.55
+max_brake_force = 120.0
+max_steer_angle = 0.45
+steer_speed = 2.4
+high_speed_steer_factor = 0.45
+body_color = Color(0.75, 0.3, 0.1, 1)
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("Mesh_chassis")
+material_override = SubResource("Mat_chassis")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -2.35)
+mesh = SubResource("Mesh_cab")
+material_override = SubResource("Mat_cab")
+
+[node name="Cargo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0.95)
+mesh = SubResource("Mesh_cargo")
+material_override = SubResource("Mat_cargo")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("Shape_body")
+
+[node name="WheelFL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05, -0.1, -2.3)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 0.1
+wheel_radius = 0.5
+wheel_rest_length = 0.3
+wheel_friction_slip = 3.6
+suspension_travel = 0.35
+suspension_stiffness = 70.0
+suspension_max_force = 22000.0
+damping_compression = 1.2
+damping_relaxation = 1.6
+
+[node name="Mesh" type="MeshInstance3D" parent="WheelFL"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_wheel")
+material_override = SubResource("Mat_tire")
+
+[node name="WheelFR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, -0.1, -2.3)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 0.1
+wheel_radius = 0.5
+wheel_rest_length = 0.3
+wheel_friction_slip = 3.6
+suspension_travel = 0.35
+suspension_stiffness = 70.0
+suspension_max_force = 22000.0
+damping_compression = 1.2
+damping_relaxation = 1.6
+
+[node name="Mesh" type="MeshInstance3D" parent="WheelFR"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_wheel")
+material_override = SubResource("Mat_tire")
+
+[node name="WheelRL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05, -0.1, 2.0)
+use_as_traction = true
+wheel_roll_influence = 0.1
+wheel_radius = 0.5
+wheel_rest_length = 0.3
+wheel_friction_slip = 3.8
+suspension_travel = 0.35
+suspension_stiffness = 70.0
+suspension_max_force = 22000.0
+damping_compression = 1.2
+damping_relaxation = 1.6
+
+[node name="Mesh" type="MeshInstance3D" parent="WheelRL"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_wheel")
+material_override = SubResource("Mat_tire")
+
+[node name="WheelRR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, -0.1, 2.0)
+use_as_traction = true
+wheel_roll_influence = 0.1
+wheel_radius = 0.5
+wheel_rest_length = 0.3
+wheel_friction_slip = 3.8
+suspension_travel = 0.35
+suspension_stiffness = 70.0
+suspension_max_force = 22000.0
+damping_compression = 1.2
+damping_relaxation = 1.6
+
+[node name="Mesh" type="MeshInstance3D" parent="WheelRR"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_wheel")
+material_override = SubResource("Mat_tire")

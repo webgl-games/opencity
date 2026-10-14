@@ -1,0 +1,28 @@
+; Engine configuration file.
+; Open this project by pointing Godot at this folder.
+
+config_version=5
+
+[application]
+
+config/name="OpenCity"
+config/description="Open-world prototype. Everything here is placeholder - built to be replaced."
+run/main_scene="res://scenes/world.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")
+
+[autoload]
+
+DevCapture="*res://scripts/dev_capture.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[physics]
+
+3d/default_gravity=14.0
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=2

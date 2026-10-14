@@ -1,0 +1,30 @@
+# Godot 4 import cache and editor state (regenerated on open)
+.godot/
+/android/
+
+# Older Godot versions / misc
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+*.translation
+
+# C# / Mono
+.mono/
+data_*/
+mono_crash.*.json
+
+# Build exports
+/build/
+/export/
+/exports/
+*.pck
+*.apk
+*.aab
+*.exe
+*.dmg
+
+# Editor and OS clutter
+.DS_Store
+.vscode/
+*.swp
